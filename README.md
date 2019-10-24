@@ -94,6 +94,37 @@ Also remember that assigning class to variable without () is acctualy creating r
 <__main__.myClass object at 0x7ff0dfc3c4a8>
 ```
 
+## Closures
+
+```python
+# We create a function
+def outer_func():
+
+    # We assign value to our variable
+    message = 'Hi'
+    
+    # We define inner_func and print the message variable
+    def inner_func():
+        print(message)
+    
+    # We return inner_func - note there is no () for execution
+    return inner_func
+    
+# my_funct is equal to returned value of outer_func (inner_funct)
+my_func = outer_func()
+
+my_func()
+my_func()
+my_func()
+
+# executing my_func is remembering message variable name!
+>>> Hi
+>>> Hi
+>>> Hi
+```
+
+A closure is an inner function that remebers and has access to variables in the local scope in which it was created. Even after the outer function has finished executing.
+
 ## Mutable vs Immutable types
 
 mutable = can be muated/changed
