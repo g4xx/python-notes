@@ -141,7 +141,8 @@ def html_tag(tag):
 # Assigning and executing html_tag with h1 as parameter
 print_h1 = html_tag('h1')
 
-# Executing print_h1 with msg. Note that it behaves just like calling wrap_text() but it remembers the tag variable value!
+# Executing print_h1 with msg. Note that it behaves just like calling wrap_text()
+# but it remembers the tag variable value!
 print_h1('Test Headline!')
 
 >>> <h1>Test Headline!<h1>
