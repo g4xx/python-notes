@@ -96,20 +96,22 @@ Also remember that assigning class to variable without () is acctualy creating r
 
 ## Closures
 
+A closure is an inner function that remebers and has access to variables in the local scope in which it was created. Even after the outer function has finished executing.
+
 ```python
 # We create a function
 def outer_func():
 
     # We assign value to our variable
     message = 'Hi'
-    
+
     # We define inner_func and print the message variable
     def inner_func():
         print(message)
-    
+
     # We return inner_func - note there is no () for execution
     return inner_func
-    
+
 # my_funct is equal to returned value of outer_func (inner_funct)
 my_func = outer_func()
 
@@ -123,7 +125,55 @@ my_func()
 >>> Hi
 ```
 
-A closure is an inner function that remebers and has access to variables in the local scope in which it was created. Even after the outer function has finished executing.
+Functions can also take parameters and remember them when executed
+
+```python
+# We pass a variable to create tag from
+def html_tag(tag):
+
+    # This inner function also accepts a parameter that prints between tags
+    def wrap_text(msg):
+        print('<' + tag + '>' + msg + '<' + tag + '>')
+
+    # Returning inner function wrap_text without ()
+    return wrap_text
+
+# Assigning and executing html_tag with h1 as parameter
+print_h1 = html_tag('h1')
+
+# Executing print_h1 with msg. Note that it behaves just like calling wrap_text() but it remembers the tag variable value!
+print_h1('Test Headline!')
+
+>>> <h1>Test Headline!<h1>
+```
+
+Another slightly more difficult example
+
+```python
+import logging
+logging.basicConfig(filename='example.log', level=logging.INFO)
+
+def logger(func):
+    def log_func(*args):
+        logging.info('Running "{}" with arguments {}'.format(func.__name__, args))
+        print(func(*args))
+    return log_func
+
+def add(x, y):
+    return x+y
+
+def sub(x, y):
+    return x-y
+
+add_logger = logger(add)
+sub_logger = logger(sub)
+
+add_logger(3, 3)
+add_logger(4, 5)
+
+sub_logger(10, 5)
+sub_logger(20, 10)
+```
 
 ## Mutable vs Immutable types
 
