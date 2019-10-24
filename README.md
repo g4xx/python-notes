@@ -176,6 +176,10 @@ sub_logger(10, 5)
 sub_logger(20, 10)
 ```
 
+## Decorators
+
+Decorator is a function that takes another function as an argument and adds some kind of functionality and then returns another function. All of this without altering source code of original function you passed in.
+
 ## Mutable vs Immutable types
 
 mutable = can be muated/changed
