@@ -112,7 +112,7 @@ def outer_func():
     # We return inner_func - note there is no () for execution
     return inner_func
 
-# my_funct is equal to returned value of outer_func (inner_funct)
+# my_func is equal to returned value of outer_func (inner_funct)
 my_func = outer_func()
 
 my_func()
