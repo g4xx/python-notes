@@ -319,3 +319,100 @@ for color in colors:
 
 >>> defaultdict(<class 'int'>, {'red': 3, 'green': 2, 'blue': 1})
 ```
+
+### Grouping with dictionaries
+
+``` python
+names = ['raymond', 'rachel', 'matthew', 'roger', 'betty', 'melissa', 'judith', 'charlie']
+
+# Not bad way
+d = {}
+for name in names:
+    key = len(name)
+    if key not in d:
+        d[key] = []
+    d[key].append(name)
+
+>>> {7: ['raymond', 'matthew', 'melissa', 'charlie'], 6: ['rachel', 'judith'], 5: ['roger', 'betty']}
+
+# A bit better way, still not that beautiful
+d = {}
+for name in names:
+    key = len(name)
+    d.setdefault(key, []).append(name)
+
+>>> {7: ['raymond', 'matthew', 'melissa', 'charlie'], 6: ['rachel', 'judith'], 5: ['roger', 'betty']}
+
+# Best way (but need to have the knowlege what is going on)
+d = defaultdict(list)
+for name in names:
+    key = len(name)
+    d[key].append(name)
+
+>>> defaultdict(<class 'list'>, {7: ['raymond', 'matthew', 'melissa', 'charlie'], 6: ['rachel', 'judith'], 5: ['roger', 'betty']})
+```
+
+### Clarify function calls with keyword arguments
+
+``` python
+# This rises the questions. What is False, 20 or True?
+twitter_search('@obama', False, 20, True)
+
+# Better way
+# Do this with collections.namedtuple()
+twitter_search('@obama', retweets=False, numtweets=20, popular=True)
+```
+
+### Simultaneus state updates
+
+``` python
+# Don't do this.. No need for creating temporary variables to hold values
+tmp_x = x + dx * t
+tmp_y = y + dy * t
+tmp_dx = influence(m, x, y, dx, dy, partial='x')
+tmp_dy = influence(m, x, y, dx, dy, partial='y')
+x = tmp_x
+y = tmp_y
+dx = tmp_dx
+dy = tmp_dy
+
+# Do this instead. From the docs 'while evaluating assignment, the right-hand side is evaluated before left-hand side
+x, y, dx, dy = ( x + dx * t,
+                 y + dy * t,
+                 tmp_dx = influence(m, x, y, dx, dy, partial='x'),
+                 tmp_dy = influence(m, x, y, dx, dy, partial='y'))
+```
+
+### Concatenating strings
+``` python
+names = ['raymond', 'rachel', 'matthew', 'roger', 'betty', 'melissa', 'judith', 'charlie']
+
+# Not fun way
+s = names[0]
+for name in names[1:]:
+    s += ', ' + name
+print(s)
+
+# The only way
+print(', '.join(names))
+```
+
+### Updating sequences
+
+``` python
+names = ['raymond', 'rachel', 'matthew', 'roger', 'betty', 'melissa', 'judith', 'charlie']
+
+# If you do this many times - you are doing it wrong
+del names[0]
+names.pop(0)
+names.insert(0, 'mark')
+
+# Instead use proper data structure. Deque - A list-like sequence optimized for data accesses near its endpoints
+from collections import deque
+
+names = deque(['raymond', 'rachel', 'matthew', 'roger', 'betty', 'melissa', 'judith', 'charlie'])
+
+del names[0]
+names.popleft()
+names.appendleft('mark')
+```
