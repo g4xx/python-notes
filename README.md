@@ -1,4 +1,21 @@
 # Python Notes
+- [Python Notes](#python-notes)
+  - [First Class Functions](#first-class-functions)
+    - [Assigning function to varbiale](#assigning-function-to-varbiale)
+    - [Passing functions as arguments to other functions](#passing-functions-as-arguments-to-other-functions)
+    - [Returning functions from other functions](#returning-functions-from-other-functions)
+  - [Closures](#closures)
+  - [Decorators](#decorators)
+  - [Mutable vs Immutable types](#mutable-vs-immutable-types)
+  - [Function Default Lists](#function-default-lists)
+  - [Making Python Beautiful](#making-python-beautiful)
+    - [Looping over two collections](#looping-over-two-collections)
+    - [Counting with dictionaries](#counting-with-dictionaries)
+    - [Grouping with dictionaries](#grouping-with-dictionaries)
+    - [Clarify function calls with keyword arguments](#clarify-function-calls-with-keyword-arguments)
+    - [Simultaneus state updates](#simultaneus-state-updates)
+    - [Concatenating strings](#concatenating-strings)
+    - [Updating sequences](#updating-sequences)
 
 ## First Class Functions
 
