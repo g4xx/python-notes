@@ -407,7 +407,7 @@ del names[0]
 names.pop(0)
 names.insert(0, 'mark')
 
-# Instead use proper data structure. Deque - A list-like sequence optimized for data accesses near its endpoints
+# Instead use proper data structure. Deque is a list-like sequence optimized for data accesses near its endpoints
 from collections import deque
 
 names = deque(['raymond', 'rachel', 'matthew', 'roger', 'betty', 'melissa', 'judith', 'charlie'])
