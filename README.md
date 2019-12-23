@@ -275,7 +275,7 @@ print(l)
 
 ## Making Python Beautiful
 
-Looping over two collections
+### Looping over two collections
 
 ``` python
 names = ['John', 'Ben', 'Adam']
@@ -289,4 +289,33 @@ for i in range(n):
 # Python 3.x way 
 for name, color in zip(names, colors):
     print(name, '-->', color)
+```
+
+### Counting with dictionaries
+
+``` python
+# Not bad way
+colors = ['red', 'green', 'red', 'blue', 'green', 'red']
+
+d = {}
+for color in colors:
+    if color not in d:
+        d[color] = 0
+    d[color] += 1
+
+>>> {'red': 3, 'green': 2, 'blue': 1}
+
+# Better way
+d = {}
+for color in colors:
+    d[color] = d.get(color, 0) + 1
+
+>>> {'red': 3, 'green': 2, 'blue': 1}
+
+# Uber way but you need to know about defaultdicts, ints without arguments, collections and factory functions. On top of that it doesn't return dict but defaultdict. Not beginner friendly.
+d = defaultdict(int)
+for color in colors:
+    d[color] += 1
+
+>>> defaultdict(<class 'int'>, {'red': 3, 'green': 2, 'blue': 1})
 ```
