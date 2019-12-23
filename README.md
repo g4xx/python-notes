@@ -272,3 +272,21 @@ print(l)
 # Output:
 >>> [3, 2, 3, 4]
 ```
+
+## Making Python Beautiful
+
+Looping over two collections
+
+``` python
+names = ['John', 'Ben', 'Adam']
+colors = ['red', 'green', 'blue']
+
+# No, just no
+n = min(len(names), len(colors))
+for i in range(n):
+    print(names[i], '-->', colors[i])
+
+# Python 3.x way 
+for name, color in zip(names, colors):
+    print(name, '-->', color)
+```
