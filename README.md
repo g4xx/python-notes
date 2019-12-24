@@ -6,6 +6,7 @@
     - [Returning functions from other functions](#returning-functions-from-other-functions)
   - [Closures](#closures)
   - [Decorators](#decorators)
+  - [Generators](#generators)
   - [Mutable vs Immutable types](#mutable-vs-immutable-types)
   - [Function Default Lists](#function-default-lists)
   - [Making Python Beautiful](#making-python-beautiful)
@@ -197,9 +198,67 @@ sub_logger(20, 10)
 
 Decorator is a function that takes another function as an argument and adds some kind of functionality and then returns another function. All of this without altering source code of original function you passed in.
 
+## Generators
+
+Difference between a generator and a regular loop is that a regular loop first processes all the data and returns all the data at once. Imagine having one billion records. Looping over that data will take you a lot of time. Now try looping that same thing with generator. It _yeilds_ (returns) one piece of the data at a time which you can work with.
+
+``` python
+# This simple function take an argument (a list) and appends to another list with square roots. Then It returns the resulting list.
+
+def square_numbers(nums):
+    result = []
+    for num in nums:
+        result.append(i*i)
+    return result
+
+my_nums = square_numbers([1,2,3,4,5])
+
+print(my_nums)
+
+# The side effect of this is that the function will only return the result if all the elements of the arguments are processed. Consider how long it could take if the list had milion+ elements.
+
+# Let's take a look at a generator.
+def square_numbers(num)
+    for i in nums:
+        yield(i*i)
+
+my_nums = square_numbers([1,2,3,4,5])
+
+# This looks simpler. Doesn't it? However if we:
+
+print(my_nums)
+
+>>> <generator object square_numbers at 0x7f485827e570>
+
+# In order to print element we must use next():
+
+print(next(my_nums))
+>>> 1
+print(next(my_nums))
+>>> 4
+print(next(my_nums))
+>>> 9
+
+# Also you can print all the elements from list:
+
+for num in my_nums:
+    print(num)
+
+>>> 16
+>>> 25
+
+# Wait. What? Why only 2 values? That is beacause the generators are exhaustive. Every time you use up element from that list it will only give you the next() value. That is why it is so memory efficient and fast.
+
+# If you try to run next after exhausting the list you'll get an error:
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
+```
+
 ## Mutable vs Immutable types
 
-mutable = can be muated/changed
+mutable = can be mutated/changed
 immutable = can't be mutated/changed
 
 | Class | Immutable? |
