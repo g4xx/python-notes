@@ -218,7 +218,7 @@ print(my_nums)
 # The side effect of this is that the function will only return the result if all the elements of the arguments are processed. Consider how long it could take if the list had milion+ elements.
 
 # Let's take a look at a generator.
-def square_numbers(num)
+def square_numbers(nums)
     for i in nums:
         yield(i*i)
 
