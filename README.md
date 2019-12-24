@@ -1,4 +1,5 @@
 # Python Notes
+
 - [Python Notes](#python-notes)
   - [First Class Functions](#first-class-functions)
     - [Assigning function to varbiale](#assigning-function-to-varbiale)
@@ -67,8 +68,8 @@ def my_map(func, arg_list):
         result.append(func(i))
     return result
 
-# Using square function without () and pass it as argument to our my_map function
-# Also providing list of arguments to be used with square
+# Using square function without () and pass it as argument to our my_map
+# function. Also providing list of arguments to be used with square:
 squares = my_map(square, [1,2,3,4,5])
 
 # Same my_map function but using cube function as argument
@@ -89,7 +90,8 @@ def html_tag(tag):
     # This return wrap_text _function_ as variable
     return wrap_text
 
-# This assigns html_tag function to h1_tag with the html tag to create and _returns_ wrap_text function
+# This assigns html_tag function to h1_tag with the html tag to create and
+# _returns_ wrap_text function
 h1_tag = html_tag('h1')
 
 # this _executes_ wrap_text function assigned to h1_tag with msg
@@ -159,8 +161,8 @@ def html_tag(tag):
 # Assigning and executing html_tag with h1 as parameter
 print_h1 = html_tag('h1')
 
-# Executing print_h1 with msg. Note that it behaves just like calling wrap_text()
-# but it remembers the tag variable value!
+# Executing print_h1 with msg. Note that it behaves just like calling
+# wrap_text() but it remembers the tag variable value!
 print_h1('Test Headline!')
 
 >>> <h1>Test Headline!<h1>
@@ -174,7 +176,8 @@ logging.basicConfig(filename='example.log', level=logging.INFO)
 
 def logger(func):
     def log_func(*args):
-        logging.info('Running "{}" with arguments {}'.format(func.__name__, args))
+        logging.info(
+            'Running "{}" with arguments {}'.format(func.__name__, args))
         print(func(*args))
     return log_func
 
@@ -203,7 +206,8 @@ Decorator is a function that takes another function as an argument and adds some
 Difference between a generator and a regular loop is that a regular loop first processes all the data and returns all the data at once. Imagine having one billion records. Looping over that data will take you a lot of time. Now try looping that same thing with generator. It _yeilds_ (returns) one piece of the data at a time which you can work with.
 
 ``` python
-# This simple function take an argument (a list) and appends to another list with square roots. Then It returns the resulting list.
+# This simple function take an argument (a list) and appends to another list
+# with square roots. Then It returns the resulting list.
 
 def square_numbers(nums):
     result = []
@@ -215,7 +219,9 @@ my_nums = square_numbers([1,2,3,4,5])
 
 print(my_nums)
 
-# The side effect of this is that the function will only return the result if all the elements of the arguments are processed. Consider how long it could take if the list had milion+ elements.
+# The side effect of this is that the function will only return the result if
+# all the elements of the arguments are processed. Consider how long it could
+# take if the list had milion+ elements.
 
 # Let's take a look at a generator.
 def square_numbers(nums)
@@ -247,7 +253,10 @@ for num in my_nums:
 >>> 16
 >>> 25
 
-# Wait. What? Why only 2 values? That is beacause the generators are exhaustive. Every time you use up element from that list it will only give you the next() value. That is why it is so memory efficient and fast.
+# Wait. What? Why only 2 values?
+# That is beacause the generators are exhaustive. Every time you use up element
+# from that list it will only give you the next() value. That is why it is so
+# memory efficient and fast.
 
 # If you try to run next after exhausting the list you'll get an error:
 
@@ -362,7 +371,7 @@ n = min(len(names), len(colors))
 for i in range(n):
     print(names[i], '-->', colors[i])
 
-# Python 3.x way 
+# Python 3.x way
 for name, color in zip(names, colors):
     print(name, '-->', color)
 ```
@@ -388,7 +397,10 @@ for color in colors:
 
 >>> {'red': 3, 'green': 2, 'blue': 1}
 
-# Uber way but you need to know about defaultdicts, ints without arguments, collections and factory functions. On top of that it doesn't return dict but defaultdict. Not beginner friendly.
+
+# Uber way but you need to know about defaultdicts, ints without arguments,
+# collections and factory functions. On top of that it doesn't return dict but
+# defaultdict. Not beginner friendly.
 d = defaultdict(int)
 for color in colors:
     d[color] += 1
@@ -399,7 +411,8 @@ for color in colors:
 ### Grouping with dictionaries
 
 ``` python
-names = ['raymond', 'rachel', 'matthew', 'roger', 'betty', 'melissa', 'judith', 'charlie']
+names = ['raymond', 'rachel', 'matthew', 'roger',
+         'betty', 'melissa', 'judith', 'charlie']
 
 # Not bad way
 d = {}
@@ -409,7 +422,9 @@ for name in names:
         d[key] = []
     d[key].append(name)
 
->>> {7: ['raymond', 'matthew', 'melissa', 'charlie'], 6: ['rachel', 'judith'], 5: ['roger', 'betty']}
+>>> {7: ['raymond', 'matthew', 'melissa', 'charlie'], 6: ['rachel', 'judith'],
+     5: ['roger', 'betty']}
+
 
 # A bit better way, still not that beautiful
 d = {}
@@ -417,7 +432,9 @@ for name in names:
     key = len(name)
     d.setdefault(key, []).append(name)
 
->>> {7: ['raymond', 'matthew', 'melissa', 'charlie'], 6: ['rachel', 'judith'], 5: ['roger', 'betty']}
+>>> {7: ['raymond', 'matthew', 'melissa', 'charlie'], 6: ['rachel', 'judith'],
+     5: ['roger', 'betty']}
+
 
 # Best way (but need to have the knowlege what is going on)
 d = defaultdict(list)
@@ -425,7 +442,8 @@ for name in names:
     key = len(name)
     d[key].append(name)
 
->>> defaultdict(<class 'list'>, {7: ['raymond', 'matthew', 'melissa', 'charlie'], 6: ['rachel', 'judith'], 5: ['roger', 'betty']})
+>>> defaultdict(<class 'list'>, {7: ['raymond', 'matthew', 'melissa',
+                'charlie'], 6: ['rachel', 'judith'], 5: ['roger', 'betty']})
 ```
 
 ### Clarify function calls with keyword arguments
@@ -434,8 +452,7 @@ for name in names:
 # This rises the questions. What is False, 20 or True?
 twitter_search('@obama', False, 20, True)
 
-# Better way
-# Do this with collections.namedtuple()
+# Better way - collections.namedtuple()
 twitter_search('@obama', retweets=False, numtweets=20, popular=True)
 ```
 
@@ -452,7 +469,8 @@ y = tmp_y
 dx = tmp_dx
 dy = tmp_dy
 
-# Do this instead. From the docs 'while evaluating assignment, the right-hand side is evaluated before left-hand side
+# Do this instead. From the docs 'while evaluating assignment, the right-hand
+# side is evaluated before left-hand side
 x, y, dx, dy = ( x + dx * t,
                  y + dy * t,
                  tmp_dx = influence(m, x, y, dx, dy, partial='x'),
@@ -460,8 +478,10 @@ x, y, dx, dy = ( x + dx * t,
 ```
 
 ### Concatenating strings
+
 ``` python
-names = ['raymond', 'rachel', 'matthew', 'roger', 'betty', 'melissa', 'judith', 'charlie']
+names = ['raymond', 'rachel', 'matthew', 'roger',
+         'betty', 'melissa', 'judith', 'charlie']
 
 # Not fun way
 s = names[0]
@@ -476,17 +496,20 @@ print(', '.join(names))
 ### Updating sequences
 
 ``` python
-names = ['raymond', 'rachel', 'matthew', 'roger', 'betty', 'melissa', 'judith', 'charlie']
+names = ['raymond', 'rachel', 'matthew', 'roger',
+         'betty', 'melissa', 'judith', 'charlie']
 
 # If you do this many times - you are doing it wrong
 del names[0]
 names.pop(0)
 names.insert(0, 'mark')
 
-# Instead use proper data structure. Deque is a list-like sequence optimized for data accesses near its endpoints
+# Instead use proper data structure. Deque is a list-like sequence optimized
+# for data accesses near its endpoints
 from collections import deque
 
-names = deque(['raymond', 'rachel', 'matthew', 'roger', 'betty', 'melissa', 'judith', 'charlie'])
+names = deque(['raymond', 'rachel', 'matthew', 'roger',
+               'betty', 'melissa', 'judith', 'charlie'])
 
 del names[0]
 names.popleft()
